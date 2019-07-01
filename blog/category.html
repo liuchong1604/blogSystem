@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>管理中心- My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="/admin/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+        <div id="wrapper">
+                <div>
+                    <div class="topbar">
+                        <div class="" style="margin: 0px;background-color:honeydew;height: 30px;text-align: center;">
+                            <span style="padding-left: 10px;margin-top: 20px">我的博客</span>
+                        </div>
+                        <div class="navbar navbar-default" role="navigation">
+                            <div class="container" style="text-align: left;">
+                                <ul class="nav navbar-nav">           
+                                    <li class="dropdown" style="text-align: right">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
+                                            href="index.html"><img alt="user-img" class="img-circle" src="image/favicon.ico"/>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a  href="index.html"><i class="fa fa-eye" aria-hidden="true"></i>
+                                                    查看网站</a></li>
+                                            <li><a href="profile.html"><i class="fa fa-sun-o"></i>个人设置</a></li>
+                                            <li><a href="/admin/logout"><i class="fa fa-sign-out"></i>注销</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <p style="margin-top: 20px">点击我试试看哟</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="left side-menu" style="background: #2f353f;box-shadow: 0 1px 3px rgba(0,0,0,0.15);top: 70px">
+                        <nav class="navbar navbar-default">
+                            <div style="text-align: right">
+                                <ul class="nav navbar-nav">
+                                    <li class="active">
+                                        <a href="index.html"  class="active"><i class="fa fa-dashboard"
+                                                aria-hidden="true"></i><span> 首页 </span></a>
+                                    </li>
+                                    <li>
+                                        <a href="article_edit.html"  class="waves-effect"><i class="fa fa-pencil-square-o"
+                                                aria-hidden="true"></i><span> 发布文章 </span></a>
+                                    </li>
+                                    <li>
+                                        <a href="article_list.html"  class="waves-effect"><i class="fa fa-list"
+                                                aria-hidden="true"></i><span> 文章管理 </span></a>
+                                    </li>
+                                    <li>
+                                        <a href="comments_list.html"  class="waves-effect"><i class="fa fa-comments"
+                                                aria-hidden="true"></i><span> 评论管理 </span></a>
+                                    </li>
+                                    <li>
+                                        <a href="category.html"  class="waves-effect"><i class="fa fa-tags"
+                                                aria-hidden="true"></i><span> 分类/标签 </span></a>
+                                    </li>
+                                    <li>
+                                        <a href="links.html"   class="waves-effect"><i class="fa fa-link"
+                                                aria-hidden="true"></i><span> 友链管理 </span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <!-- <div class="col-sm-12">
+                        <h4 class="page-title">分类/标签管理</h4>
+                    </div> -->
+                    <div class="col-md-6">
+                        <div class="panel panel-color panel-primary">
+                            <div class="panel-heading" style="height: 70px">
+                                <h1 class="panel-title">分类列表</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-purple dropdown-toggle waves-effect waves-light">
+                                        Java
+                                        (3)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="edit-category" cname="Java"
+                                                mid="10">修改</a>
+                                        </li>
+                                        <li><a href="javascript:void(0)" class="del-category" mid="10">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-success dropdown-toggle waves-effect waves-light">
+                                        default
+                                        (1)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="edit-category" cname="default"
+                                                mid="1">修改</a>
+                                        </li>
+                                        <li><a href="javascript:void(0)" class="del-category" mid="1">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-danger dropdown-toggle waves-effect waves-light">
+                                        Python
+                                        (0)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="edit-category" cname="Python"
+                                                mid="19">修改</a>
+                                        </li>
+                                        <li><a href="javascript:void(0)" class="del-category" mid="19">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-info dropdown-toggle waves-effect waves-light">
+                                        随笔
+                                        (0)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="edit-category" cname="随笔"
+                                                mid="20">修改</a>
+                                        </li>
+                                        <li><a href="javascript:void(0)" class="del-category" mid="20">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+
+                                    <button type="button" class="btn btn-success waves-effect waves-light">
+                                        默认分类
+                                        (0)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="panel  panel-pink">
+                            <div class="panel-heading" style="background-color: #ec407a;height: 70px;">
+                                <h1 class="panel-title">标签列表</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-purple dropdown-toggle waves-effect waves-light">
+                                        Java
+                                        (3)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="9">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-primary dropdown-toggle waves-effect waves-light">
+                                        HashMap
+                                        (1)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="11">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-info dropdown-toggle waves-effect waves-light">
+                                        HashTable
+                                        (1)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="12">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-danger dropdown-toggle waves-effect waves-light">
+                                        HashSet
+                                        (1)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="13">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-purple dropdown-toggle waves-effect waves-light">
+                                        ConcurrentHashMap
+                                        (1)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="14">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-inverse dropdown-toggle waves-effect waves-light">
+                                        Pyspider
+                                        (1)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="15">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-inverse dropdown-toggle waves-effect waves-light">
+                                        Python
+                                        (1)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="16">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-primary dropdown-toggle waves-effect waves-light">
+                                        爬虫
+                                        (1)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="17">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-warning dropdown-toggle waves-effect waves-light">
+                                        随笔
+                                        (0)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="8">删除</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group m-b-10">
+                                    <button type="button" data-toggle="dropdown" aria-expanded="false"
+                                        class="btn btn-danger dropdown-toggle waves-effect waves-light">
+                                        &lt;/a&gt;&lt;script&gt;window.location.href=&quot;http://www.baidu.com&quot;;&lt;/script&gt;&lt;a&gt;
+                                        (0)
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:void(0)" class="del-category" mid="21">删除</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form id="cform" class="form-inline" role="form">
+                                    <input type="hidden" id="mid" />
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="cname" placeholder="请输入分类名称" />
+                                    </div>
+                                    <button id="save-category-btn" type="button"
+                                        class="btn btn-success waves-effect waves-light m-l-10">保存分类
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

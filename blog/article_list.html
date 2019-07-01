@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>管理中心- My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div>
+            <div class="topbar">
+                <div class="" style="margin: 0px;background-color:honeydew;height: 30px;text-align: center;">
+                    <span style="padding-left: 10px;margin-top: 20px">我的博客</span>
+                </div>
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container" style="text-align: left;">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown" style="text-align: right">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
+                                    href="index.html"><img alt="user-img" class="img-circle" src="image/favicon.ico" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a target="_blank" href="index.html"><i class="fa fa-eye"
+                                                aria-hidden="true"></i>
+                                            查看网站</a></li>
+                                    <li><a href="profile.html"><i class="fa fa-sun-o"></i>个人设置</a></li>
+                                    <li><a href="/admin/logout"><i class="fa fa-sign-out"></i>注销</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p style="margin-top: 20px">点击我试试看哟</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="left side-menu" style="background: #2f353f;box-shadow: 0 1px 3px rgba(0,0,0,0.15);top: 70px">
+                <nav class="navbar navbar-default">
+                    <div style="text-align: right">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href="index.html" class="active"><i class="fa fa-dashboard"
+                                        aria-hidden="true"></i><span> 首页 </span></a>
+                            </li>
+                            <li>
+                                <a href="article_edit.html" class="waves-effect"><i class="fa fa-pencil-square-o"
+                                        aria-hidden="true"></i><span> 发布文章 </span></a>
+                            </li>
+                            <li>
+                                <a href="article_list.html" class="waves-effect"><i class="fa fa-list"
+                                        aria-hidden="true"></i><span> 文章管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="comments_list.html" target="_blank" class="waves-effect"><i
+                                        class="fa fa-comments" aria-hidden="true"></i><span> 评论管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="category.html" class="waves-effect"><i class="fa fa-tags"
+                                        aria-hidden="true"></i><span> 分类/标签 </span></a>
+                            </li>
+                            <li>
+                                <a href="links.html" class="waves-effect"><i class="fa fa-link"
+                                        aria-hidden="true"></i><span> 友链管理 </span></a>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <!-- <div class="col-sm-12">
+                        <h3 class="page-title">文章管理</h3>
+                    </div> -->
+                    <div class="col-md-12">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th width="35%">文章标题</th>
+                                    <th width="15%">发布时间</th>
+                                    <th>浏览量</th>
+                                    <th>所属分类</th>
+                                    <th width="8%">发布状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="article" id="article">
+                                <tr v-for="item,index in onPage2">
+                                    <td>
+                                        <a href="#">{{page[index].title}}</a><!--:onclick="for_onclick1(index)" -->
+                                    </td>
+                                    <td>{{page[index].created*1000}}</td>
+                                    <td>{{page[index].hits}}</td>
+                                    <td>{{page[index].categories}}</td>
+                                    <td>
+                                        <span class="label label-success">{{page[index].status}}</span>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm waves-effect waves-light m-b-5"
+                                            href="#/admin/article/3"><i class="fa fa-edit"></i> <span>编辑</span></a>
+                                        <a href="javascript:void(0)"
+                                            class="btn btn-danger btn-sm waves-effect waves-light m-b-5"
+                                            onclick="delPost(3);"><i class="fa fa-trash-o"></i> <span>删除</span></a>
+                                        <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5" target="_blank"
+                                            href="preview.html"><i class="fa fa-rocket"></i>
+                                            <span>预览</span></a>
+                                    </td>
+                                    <!-- <td>{{page[index].cid}}</td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <div class="clearfix" id="clearfix">
+                                <ul class="pagination m-b-5 pull-right">
+                                    <li class="active"><a v-for="item,index in onPage"
+                                            :onclick="for_onclick(index)">{{onPage[index]}}</a>
+                                    </li>
+                                    <li><span>共{{page}}页</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+    </script>
+    <script>
+        var page = [];
+        var pageNum = [];
+        var url;
+        var n = GetQueryString("pageNum")
+        console.log(n);
+        console.log(n != null && n.toString().length > 0)
+        if (n != null && n.toString().length > 0) {
+            url = "http://localhost:8082/admin/article?pageNum=" + n
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "JSON",
+                contentType: "application/json,charset=utf-8",
+                async: false,
+                success: function (result) {
+                    a = JSON.stringify(result);
+                    b = JSON.parse(a)
+                    page.push(result.data["pageTotal"])
+                    page.push(result.data["contents"])
+                    console.log(page[1])
+                },
+                error: function (data, textStatus) {
+                    alert("请求失败");
+                    alert(textStatus);
+                }
+            });
+            var onPage = []
+            for (var i = 1; i <= page[0]; i++) {
+                onPage.push(i)
+            }
+            new Vue({
+                el: '#clearfix',
+                data: {
+                    onPage: onPage,
+                    page: page[0]
+                },
+                methods: {
+                    for_paging: function (index) {
+                        return onPage[index]
+                    },
+                    for_li: function (index) {
+                        return "li" + onPage[index]
+                    },
+                    for_onclick: function (index) {
+                        return "window.location.href='F:/vscodeFile/lc/blog/article_list.html?pageNum=" +
+                            onPage[index] + "'"// + "&" + "tag_id=" + label + "'"
+                    },
+                    for_onclick1(index){
+
+                    }
+                }
+            })
+            var onPage2 = []
+            for (var i = 1; i <= page[1].length; i++) {
+                onPage2.push(i);
+            }
+            new Vue({
+                el: "#article",
+                data: {
+                    onPage2: onPage2,
+                    page: page[1]
+                },
+                method: {
+
+                }
+            })
+        } else {
+            url = "http://localhost:8082/admin/article"
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "JSON",
+                contentType: "application/json,charset=utf-8",
+                async: false,
+                success: function (result) {
+                    a = JSON.stringify(result);
+                    b = JSON.parse(a)
+                    page.push(result.data["pageTotal"])
+                    page.push(result.data["contents"])
+                    console.log(page[1])
+                },
+                error: function (data, textStatus) {
+                    alert("请求失败");
+                    alert(textStatus);
+                }
+            });
+            var onPage = []
+            for (var i = 1; i <= page[0]; i++) {
+                onPage.push(i)
+            }
+            new Vue({
+                el: '#clearfix',
+                data: {
+                    onPage: onPage,
+                    page: page[0]
+                },
+                methods: {
+                    for_paging: function (index) {
+                        return onPage[index]
+                    },
+                    for_li: function (index) {
+                        return "li" + onPage[index]
+                    },
+                    for_onclick: function (index) {
+                        return "window.location.href='F:/vscodeFile/lc/blog/article_list.html?pageNum=" +
+                            onPage[index] + "'"// + "&" + "tag_id=" + label + "'"
+                    },
+                    for_onclick1(index){
+
+                    }
+                }
+            })
+            var onPage2 = []
+            for (var i = 1; i <= page[1].length; i++) {
+                onPage2.push(i);
+            }
+            console.log(page[1])
+            new Vue({
+                el: "#article",
+                data: {
+                    onPage2: onPage2,
+                    page: page[1]
+                },
+                method: {
+
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

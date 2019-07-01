@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>管理中心- My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="F:/vscodeFile/lc/blog/image/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.9.0/styles/xcode.min.css" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="js/getData.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div>
+            <div class="topbar">
+                <div class="" style="margin: 0px;background-color:honeydew;height: 30px;text-align: center;">
+                    <span style="padding-left: 10px;margin-top: 20px">我的博客</span>
+                </div>
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container" style="text-align: left;">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown" style="text-align: right">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
+                                    href="index.html"><img alt="user-img" class="img-circle" src="image/favicon.ico" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a target="_blank" href="index.html"><i class="fa fa-eye"
+                                                aria-hidden="true"></i>
+                                            查看网站</a></li>
+                                    <li><a href="profile.html"><i class="fa fa-sun-o"></i>个人设置</a></li>
+                                    <li><a href="/admin/logout"><i class="fa fa-sign-out"></i>注销</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p style="margin-top: 20px">点击我试试看哟</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="left side-menu" style="background: #2f353f;box-shadow: 0 1px 3px rgba(0,0,0,0.15);top: 70px">
+                <nav class="navbar navbar-default">
+                    <div style="text-align: right">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href="index.html" target="_blank" class="active"><i class="fa fa-dashboard"
+                                        aria-hidden="true"></i><span> 首页 </span></a>
+                            </li>
+                            <li>
+                                <a href="article_edit.html" target="_blank" class="waves-effect"><i
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></i><span> 发布文章 </span></a>
+                            </li>
+                            <li>
+                                <a href="article_list.html" target="_blank" class="waves-effect"><i class="fa fa-list"
+                                        aria-hidden="true"></i><span> 文章管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="comments_list.html" target="_blank" class="waves-effect"><i
+                                        class="fa fa-comments" aria-hidden="true"></i><span> 评论管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="category.html" target="_blank" class="waves-effect"><i class="fa fa-tags"
+                                        aria-hidden="true"></i><span> 分类/标签 </span></a>
+                            </li>
+                            <li>
+                                <a href="links.html" target="_blank" class="waves-effect"><i class="fa fa-link"
+                                        aria-hidden="true"></i><span> 友链管理 </span></a>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div id="post-content" class="post-content" itemprop="articleBody" style="margin-left: 100px;">
+        <p>Java进阶</p>
+        <div class="bread" id="href">
+            当前位置：
+            <p style="display: inline-block;">发布于{{page2}}</p>
+            <!--:onclick="window.location.href='#'"-->
+            <span>/</span>
+            <a >{{page1}}</a>
+            <span> /</span>
+            <a href="#">1条评论</a>
+            <span> /</span>
+            <a href="#">20人评论</a>
+        </div>
+        <div class="content" id="content"
+            style="border:solid 1px rgba(184, 197, 214, 2);border-radius: 3px;width: 1000px;background-color: #f7f7f7;white-space: pre-wrap">
+            {{page}}
+        </div>
+        <div>
+            <p class="post-info">
+                本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名,转载请标明出处<br />最后编辑时间为:
+                <span></span>
+            </p>
+        </div>
+    </div>
+    <script>
+        var cid = GetQueryString("cid")
+        if (cid != null && cid.toString().length > 0)
+            var url = "http://localhost:8082/admin/article/selectContentById?cid=" + cid
+        console.log(url)
+        var page = []
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType: "JSON",
+            contentType: "application/json,charset=utf-8",
+            async: false,
+            success: function (result) {
+                a = JSON.stringify(result);
+                b = JSON.parse(a);
+                page.push(result.data);
+                //console.log(page[0]);
+                //document.getElementById('showinfo2').innerHTML = page[0].content;
+            },
+            error: function (data, textStatus) {
+                alert("请求失败");
+                alert(textStatus);
+            }
+        });
+        console.log(page[0].tags)
+        new Vue({
+            el: '#post-content',
+            data: {
+                page:page[0].content,
+                page1:page[0].tags,
+                page2:new Date(page[0].created)
+            },           
+        })
+        
+
+    </script>
+    <br />
+
+    <div class="comment-container" style="position: relative;z-index: 1;color: #5f5f5f;background-color: #f7f7f7;">
+        <div id="comments" class="clear-fix col-md-offset-2" style="max-width: 700px;zoom: 1;">
+
+            <div>
+
+                <form method="post" id="comment-form" class="comment-form" role="form"
+                    onsubmit="return TaleComment.subComment();" style="border: 1px solid rgba(184, 197, 214, 2);border-radius: 3px;
+                        background: #fff;">
+                    <p>请在下方输入你的留言</p>
+                    <input type="hidden" name="coid" id="coid">
+                    <input type="hidden" name="cid" id="cid" value="6">
+                    <input type="hidden" name="_csrf_token" value="dJBG_5bZFOqz4UrBkiel2-">
+                    <input type="text" name="author" maxlength="12" id="author"
+                        class="form-control input-control clearfix col-md-offset-1 col-md-3" placeholder="姓名 (*)"
+                        style="width: 200px;" />
+                    <input type="email" name="mail" id="mail"
+                        class="form-control input-control clearfix col-md-offset-2 col-md-3" placeholder="邮箱 (*)"
+                        style="width: 200px;" />
+
+                    <textarea name="text" id="textarea" class="form-control" placeholder="以上信息可以为空,评论不能为空哦!"
+                        required="required" minlength="5" maxlength="2000" style="margin-top: 60px"></textarea>
+                    <br />
+                    <button type="submit" class="submit" id="misubmit" style="margin-left: 300px">提交</button>
+                    <br />
+
+                </form>
+            </div>
+            <br />
+            <div>
+                <h3>该文章的留言内容，仅供参考</h3>
+                <ol class="comment-list" style="margin:0;padding:0;list-style-type:none">
+
+                    <li class="comment-body comment-parent comment-odd" id="li-comment-6" style="border: 1px solid rgba(184, 197, 214, 2);;border-radius: 3px;
+                        background: #fff;">
+                        <div id="comment-6">
+                            <div class="comment-view" onclick="">
+                                <div class="comment-header">
+                                    <span class="comment-author">
+                                        <a href="##" rel="external nofollow">热心网友</a>
+                                    </span>
+                                </div>
+                                <div class="comment-content">
+                                    <span class="comment-author-at"></span>
+                                    <p></p>
+                                    <p>11111</p>
+                                    <p></p>
+                                </div>
+                                <div class="comment-meta">
+                                    <time class="comment-time">2019-06-27</time>
+                                    <span class="comment-reply">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+</body>
+
+</html>

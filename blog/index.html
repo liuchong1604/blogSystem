@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>管理中心- My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="/admin/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div>
+            <div class="topbar">
+                <div class="" style="margin: 0px;background-color:honeydew;height: 30px;text-align: center;">
+                    <span style="padding-left: 10px;margin-top: 20px">我的博客</span>
+                </div>
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container" style="text-align: left;">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown" style="text-align: right">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
+                                    href="index.html"><img alt="user-img" class="img-circle" src="image/favicon.ico" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="index.html"><i class="fa fa-eye" aria-hidden="true"></i>
+                                            查看网站</a></li>
+                                    <li><a href="profile.html"><i class="fa fa-sun-o"></i>个人设置</a></li>
+                                    <li><a href="/admin/logout"><i class="fa fa-sign-out"></i>注销</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p style="margin-top: 20px">点击我试试看哟</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="left side-menu" style="background: #2f353f;box-shadow: 0 1px 3px rgba(0,0,0,0.15);top: 70px">
+                <nav class="navbar navbar-default">
+                    <div style="text-align: right">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href="index.html" class="active"><i class="fa fa-dashboard"
+                                        aria-hidden="true"></i><span> 首页 </span></a>
+                            </li>
+                            <li>
+                                <a href="article_edit.html" class="waves-effect"><i class="fa fa-pencil-square-o"
+                                        aria-hidden="true"></i><span> 发布文章 </span></a>
+                            </li>
+                            <li>
+                                <a href="article_list.html" class="waves-effect"><i class="fa fa-list"
+                                        aria-hidden="true"></i><span> 文章管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="comments_list.html" class="waves-effect"><i class="fa fa-comments"
+                                        aria-hidden="true"></i><span> 评论管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="category.html" class="waves-effect"><i class="fa fa-tags"
+                                        aria-hidden="true"></i><span> 分类/标签 </span></a>
+                            </li>
+                            <li>
+                                <a href="links.html" class="waves-effect"><i class="fa fa-link"
+                                        aria-hidden="true"></i><span> 友链管理 </span></a>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">首页</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">最新文章</h4>
+                                    </div>
+                                    <div class="panel-body" id="panel-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item" v-for="item,index in onPage">
+                                                <a target="_blank" href="#">{{page1[index].title}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">最新留言</h4>
+                                    </div>
+                                    <div class="panel-body" id="panel-body2">
+                                        <ul class="list-group">
+                                            <li class="list-group-item" v-for="item,index in onPage">
+                                                <p>{{page[index].author}}</p>
+                                                于{{page[index].created}}:<br>
+                                                <p>评论内容:</p>
+                                                <a target="_blank" href="#">
+                                                    <p>{{page[index].content}}</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">系统日志</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <span>2019-06-27 19:04:41 =&gt; 登录后台</span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span>2019-06-27 19:04:40 =&gt; 登录后台</span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span>2019-06-27 19:04:39 =&gt; 登录后台</span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span>2019-06-27 14:27:25 =&gt; 登录后台</span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span>2019-06-27 14:26:05 =&gt; 登录后台</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+            var page = [];
+            var onPage = []
+            $.ajax({
+                type: "get",
+                url: "http://localhost:8082/admin/index",
+                dataType: "JSON",
+                contentType: "application/json,charset=utf-8",
+                async: false,
+                success: function (result) {
+                    a = JSON.stringify(result);
+                    b = JSON.parse(a)
+                    page.push(result.data["recentContents"])
+                    page.push(result.data["recentComments"])
+                    console.log(page[0])
+                    console.log(page[1])
+                },
+                error: function (data, textStatus) {
+                    alert("请求失败");
+                    alert(textStatus);
+                }
+            });
+            for (var i = 1; i <= 5; i++) {
+                onPage.push(i);
+            }
+            new Vue({
+                el: '#panel-body',
+                data:{
+                    onPage:onPage,
+                    page1:page[0],
+                    }
+                }
+
+            )
+            new Vue({
+                el: '#panel-body2',
+                data:{
+                    onPage:onPage,
+                    page:page[1],
+                    }
+                }
+
+            )
+        </script>
+    <iframe src="foot.html" width=100% height=30% frameborder="0"></iframe>
+</body>
+
+</html>
